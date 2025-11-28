@@ -50,6 +50,15 @@ class Hangman:
             # ასოს შეყვანა
             letter = input("შეიყვანე ასო: ").upper()  #ვაქცევთ დიდ ასოდ
 
+             #ვალიდაცია
+            if len(letter) != 1:
+                print("დაწერე მხოლოდ ერთი ასო!")
+                continue  # თავიდან იკითხოს
+
+            if letter in self.guesses:
+                print("ეს ასო უკვე თქვით.")
+                continue
+
             #ვამატებთ ასოს გამოყენებულებში
             self.guesses.append(letter)
 
