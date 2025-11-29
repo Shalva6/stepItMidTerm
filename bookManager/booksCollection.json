@@ -1,0 +1,33 @@
+[
+    {
+        "Author": "Paulo Coelho",
+        "Author's books": [
+            {
+                "Title": "Eleven Minutes",
+                "Year": 2003
+            },
+            {
+                "Title": "The Alchemist",
+                "Year": 1988
+            }
+        ]
+    },
+    {
+        "Author": "Dato Turashvili",
+        "Author's books": [
+            {
+                "Title": "Jeans' Generation",
+                "Year": 1988
+            }
+        ]
+    },
+    {
+        "Author": "Steve Watson",
+        "Author's books": [
+            {
+                "Title": "Before I Go to Sleep",
+                "Year": 2011
+            }
+        ]
+    }
+]
