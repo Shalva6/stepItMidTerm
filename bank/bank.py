@@ -6,30 +6,30 @@ from decimal import Decimal, InvalidOperation
 class Bank:
     def __init__(self, balance):
         self.balance = str(balance)
-        with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "a") as f:
+        with open("bank/userBalance.txt", "a") as f:
             f.write(self.balance)
     
     def printMoney(self):
-        with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "r") as f:
+        with open("bank/userBalance.txt", "r") as f:
             currentBalanace = Decimal(f.read())
             currentBalanace = f"{currentBalanace:,.2f}"
             print(f"You have {currentBalanace}$ on your balance.")
     
     def depositMoney(self, amount):
-        with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "r") as f:
+        with open("bank/userBalance.txt", "r") as f:
             currentBalanace = Decimal(f.read())
         
         # ვქმნით დროებით ცვლადს რომ ახალი მნიშვნელობები მივანიჭოთ
         # ჯერ სტრინგად იმიტომ ვაქცევთ მიცემულ ინფორმაციას რომ ეს 'დაუშნოება' არ მოხდეს
         # სტრინგის გარეშე 0.65 გადაიქცევა 0.6499999..ად. ხოლოს სტრინგი 0.65ს იკავებს ზუსტად
-        currentBalanace += Decimal(str(amount))
+        currentBalanace += amount
 
         # 'w'ს გამოყენებით შეგვიძლია overwriteის განხორციელება
-        with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "w") as f:
+        with open("bank/userBalance.txt", "w") as f:
             f.write(str(currentBalanace))
 
     def withdrawMoney(self, amount):
-        with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "r") as f:
+        with open("bank/userBalance.txt", "r") as f:
             currentBalanace = Decimal(f.read())
 
         # მოწმდება შეგვიძლია თუ არა მაგდენი რაოდენობა თანხის გამოტანა
@@ -37,7 +37,7 @@ class Bank:
             print("You do not have sufficient funds for this action.")
         else:
             # იგივე რაც depositMoneyში
-            currentBalanace -= Decimal(str(amount))
+            currentBalanace -= amount
             with open("C:/Users/shalv/OneDrive/Desktop/stepItMidterms/bank/userBalance.txt", "w") as f:
                 f.write(str(currentBalanace))
 
