@@ -5,7 +5,7 @@ class Hangman:
         # სიტყვების სია
         self.words_list = ["PYTHON","PYCHARM","ITSTEP"]
 
-
+        #ირჩევს ერთ random სიტყვას
         self.secret_word = random.choice(self.words_list)
 
 
@@ -14,9 +14,9 @@ class Hangman:
 
     def show_board(self):
 
-        display_list = []
+        display_list = [] #დროებითი სია ვიზუალიზაციისთვის
 
-
+        #გავდივართ საიდუმლო სიტყვის თითოეულ ასოზე
         for char in self.secret_word:
             if char in self.guesses:
                 # თუ ასო უკვე გამოცნობილია, ვამატებთ ასოს
@@ -25,10 +25,10 @@ class Hangman:
                 # თუ არა, ვამატებთ ტირეს
                 display_list.append("_")
 
-
+        #join აერთებს სიის ელემენტებს ერთ სტრიქონად შუაში გამოტოვებით
         print("სიტყვა:", " ".join(display_list))
 
-        # თუ სიაში ტირე აღარ დარჩა, ესეიგი მოიგო
+        #მოგების შემოწმება, თუ სიაში ტირე აღარ დარჩა, ესეიგი მოიგო
         if "_" not in display_list:
             return True
         return False
@@ -37,20 +37,20 @@ class Hangman:
         """თამაშის მთავარი ციკლი"""
         print("დავიწყეთ თამაში!")
 
-        # სანამ სიცოცხლე გვაქვს
+        #ციკლი ტრიალებს სანამ სიცოცხლე გვაქვს
         while self.lives > 0:
             print("\n----------------")
             print(f"დარჩენილი სიცოცხლე: {self.lives}")
 
-            # ვამოწმებთ, ხომ არ მოიგო
+            # ვამოწმებთ, ხომ არ მოიგო, თუ ის true-ს დააბრუნებს, ესეიგი მოვიგეთ
             if self.show_board():
                 print("გილოცავ! შენ გამოიცანი სიტყვა!")
                 return  #თამაში მორჩა
 
-            # ასოს შეყვანა
-            letter = input("შეიყვანე ასო: ").upper()  #ვაქცევთ დიდ ასოდ
+            #მომხმარებელს შეყავს ასო და ვაქცევთ დიდ ასოდ
+            letter = input("შეიყვანე ასო: ").upper()
 
-             #ვალიდაცია
+             #ვალიდაცია(შემოწმება)
             if len(letter) != 1:
                 print("დაწერე მხოლოდ ერთი ასო!")
                 continue  # თავიდან იკითხოს
@@ -62,6 +62,7 @@ class Hangman:
             #ვამატებთ ასოს გამოყენებულებში
             self.guesses.append(letter)
 
+            #ვამოწმებთ, არის თუ არა ეს ასო საიდუმლო სიტყვაში
             if letter in self.secret_word:
                 print("სწორია!")
             else:
