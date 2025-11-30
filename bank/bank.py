@@ -13,7 +13,7 @@ class Bank:
         with open("bank/userBalance.txt", "r") as f:
             currentBalanace = Decimal(f.read())
             currentBalanace = f"{currentBalanace:,.2f}"
-            print(f"You have {currentBalanace}$ on your balance.")
+            print(f"შენ გაქვს {currentBalanace}$ ბალანსზე.")
     
     def depositMoney(self, amount):
         with open("bank/userBalance.txt", "r") as f:
@@ -34,7 +34,7 @@ class Bank:
 
         # მოწმდება შეგვიძლია თუ არა მაგდენი რაოდენობა თანხის გამოტანა
         if amount > currentBalanace:
-            print("You do not have sufficient funds for this action.")
+            print("ამ ქმედებისთვის არ გაქვს საკმარისი ფული.")
         else:
             # იგივე რაც depositMoneyში
             currentBalanace -= amount
@@ -45,18 +45,18 @@ class Bank:
 def validateMoneyInput():
     while True:
         try:
-            amount = Decimal(input("Please enter the amount of money: "))
+            amount = Decimal(input("გთხოვთ შეიყვანეთ რა როდენბა ფულთან მუშაობთ: "))
         except InvalidOperation:
-            print("Do not use non-integer sybmol(s).")
+            print("გთხოვთ გამოიყენეთ ციფრები")
             continue
 
         if amount < 0:
-            print("Enter amount more than 0.")
+            print("გთხოვთ შეიყვანოთ 0ზე მეტი ოდენობა.")
             continue
 
         # ამოწმებს რომ წილადის მერე 2ზე მეტი ციფრი არ იყოს
         if amount.as_tuple().exponent < -2:
-            print("Only enter 2 numbers after the decimal point.")
+            print("წერტილის მერე შეიყვანეთ მხოლოდ 2 ციფრი.")
             continue
 
         return amount
@@ -64,18 +64,18 @@ def validateMoneyInput():
 # იგივე სტრუქტურა რომელსაც validateMoneyInput იყენებს. ამ ლუპით ვქმნით ზოგადად კლასს.
 while True:
     try:
-        startingMoney = Decimal(input("Please chose the money you'd like to start working with: "))
+        startingMoney = Decimal(input("გთხოვთ აირჩიეტ საწყისი ტანხის ოდენობა: "))
     except InvalidOperation:
-        print("Do not use non-integer symbol(s).")
+        print("გთხოვთ გამოიყენეთ ციფრები")
         continue
 
     if startingMoney < 0:
-        print("Enter amount equal to or more than 0.")
+        print("გთხოვთ შეიყვანოთ 0ზე მეტი ოდენობა.")
         continue
 
     # ამოწმებს რომ წილადის მერე 2ზე მეტი ციფრი არ იყოს
     if startingMoney.as_tuple().exponent < -2:
-        print("Only enter 2 numbers after the decimal point.")
+        print("წერტილის მერე შეიყვანეთ მხოლოდ 2 ციფრი.")
         continue
 
     balance = Bank(startingMoney)
@@ -84,16 +84,16 @@ while True:
 # მთავარი მამუშავებელი
 while True:
     # ვაძლევთ მომხმარებელს 
-    print("1. Print money.")
-    print("2. Deposit money.")
-    print("3. Take out money.")
-    print("4. Stop the program.")
+    print("1. ბალანსის ნახვა.")
+    print("2. ფულის შეტანა.")
+    print("3. ფულის გამოტანა.")
+    print("4. გასვლა.")
 
     # მომხმარებელს შეყავს ქმედების ნომერი და პარალელურად მოწმდება ვალიდაცია
     try:
-        actionChooser = int(input("Please enter the action you'd like to do: "))
+        actionChooser = int(input("გთხოვთ შეიყვანეთ სასურველი ქმედების აიდი: "))
     except ValueError:
-        print("Do not use non-integer symbol(s).")
+        print("გთხოვთ გამოიყენეთ ციფრები")
         continue
 
     # ქმედების ნომრები და შემთხვევები
@@ -106,7 +106,7 @@ while True:
         case 3:
             balance.withdrawMoney(validateMoneyInput())
         case 4:
-            print("Thank you for using our services.")
+            print("პროგრამის დასასრული.")
             break
         case _:
-            print("Please enter numbers '1', '2', or '3'")
+            print("შეიყვანე რიცხვები '1', '2', ან '3'")
