@@ -6,9 +6,9 @@ class BookManager:
 
     def showAllBooks(self):
         for eachPerson in self.__listOfAllBooks:
-            print(f"Author {eachPerson['Author']}'s works:")
+            print(f"ავტორი {eachPerson['Author']}ს მანუშევრებია:")
             for personsBook in eachPerson["Author's books"]:
-                print(f" - {personsBook['Title']} in {personsBook['Year']}")
+                print(f" - {personsBook['Title']} დაწერილი {personsBook['Year']} წელს")
         print()
 
     def dataSaver(self):
@@ -23,7 +23,7 @@ class BookManager:
                     "Title": userBook.title,
                     "Year": userBook.releaseYear
                 }) 
-                print("Data has been updated: New book added into the list.")
+                print("დაემატა ახალი წიგნი.")
                 self.dataSaver()
                 return
             
@@ -34,16 +34,16 @@ class BookManager:
                 "Year": userBook.releaseYear
             }]
         })
-        print("New author added.")
+        print("დაემატა ახალი ავტორი.")
         self.dataSaver()
     
     def findBookByTitle(self, userBook):
         for eachPersonInList in self.__listOfAllBooks:
             for book in eachPersonInList["Author's books"]:
                 if userBook.title.lower() == book["Title"].lower():
-                    print(f"{book["Title"]} was written by {eachPersonInList['Author']} in {book["Year"]}")
+                    print(f"{book["Title"]} იყო დაწერილი {eachPersonInList['Author']} მიერ {book["Year"]} წელს")
                     return
-        print(f"No book under the title of {userBook.title} found.")
+        print(f"წიგნი {userBook.title} არ არსებობს ბიბლიოთეკაში.")
 
 # ვქმნით ახალ წინგს
 class Book:
@@ -57,16 +57,16 @@ manager = BookManager()
 
 while True:
     # მომხმარებელს ვაჩვენებთ შესაძლო ქმედებებს
-    print("1. Show the list of all books.")
-    print("2. Look for book by title name.")
-    print("3. Add a new book.")
-    print("4. Quit the program.")
+    print("1. წიგნების გამოტანა.")
+    print("2. წიგნის სახელით მოძებნა.")
+    print("3. ახალი წიგნის დამატება.")
+    print("4. გამოსვლა პროგრამიდან.")
 
     # ქმედების აიდის ვალიდაცია
     try:
-        action = int(input("Please choose an action: "))
+        action = int(input("ჩაწერე ქმედების აიდი: "))
     except ValueError:
-        print("Please enter a valid action.")
+        print("შეიყვანე სწორი მონაცემი (რიცხვები).")
         continue
 
     # ქმედებები
@@ -74,22 +74,22 @@ while True:
         case 1:
             manager.showAllBooks()
         case 2:
-            userTitle = input("Please enter the name of the book you are trying to find: ")
+            userTitle = input("ჩაწერე სახელი წიგნისა, რომელსაც ეძებ: ")
             userBook = Book(None, userTitle, None)
             manager.findBookByTitle(userBook)
         case 3:
-            userAuthor = input("Please enter the name of the name of your author: ")
-            userTitle = input("Please enter the name of the name of your author's title: ")
+            userAuthor = input("ჩაწერე ავტორის სახელი: ")
+            userTitle = input("ჩაწერე წიგნის სახელი: ")
             try:
-                userYear = int(input("Please enter the name of the name of your author's book year: "))
+                userYear = int(input("ჩაწერე რომელ წელს დაიწერა ეს წიგნი: "))
             except ValueError:
-                print("Please enter a valid year.")
+                print("შეიყვანე მხოლოდ რიცხვები.")
                 continue
             userBook = Book(userAuthor, userTitle, userYear)
             manager.addBook(userBook)
         case 4:
-            print("Thank you for using BookLibrary.tm. Exiting program.")
+            print("სრულდება პროგრამა.")
             break
         case _:
-            print("Please choose a valid option.")
+            print("აირჩიეტ სწორი მოქმედება.")
             continue
